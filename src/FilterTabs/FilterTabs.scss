@@ -1,0 +1,50 @@
+$activeTabBackground: #2196F3;
+$nonActiveTabBackground: #ffffff;
+$borderTabColor: #DFE5EC;
+$textColor: #4A4A4A;
+
+.tabs {
+  width: 502px;
+  height: 50px;
+
+  display: flex;
+  justify-content: space-between;
+
+  text-transform: uppercase;
+  cursor: pointer;
+  .tabs__element {
+    width: 33.3333333333333%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: $nonActiveTabBackground;
+    border: 1px solid $borderTabColor;
+
+    transition: all .3s ease;
+    .tabs__element__title {
+      font-size: 12px;
+      font-weight: 600;
+      color: $textColor;
+      letter-spacing: 0.5px;
+    }
+
+    &:hover {
+      background-color: $activeTabBackground;
+      border: none;
+      .tabs__element__title {
+        color: $nonActiveTabBackground;
+      }
+    }
+  }
+
+  .tabs__element--active {
+    background-color: $activeTabBackground;
+    border: none;
+    .tabs__element__title {
+      color: $nonActiveTabBackground;
+    }
+  }
+}

@@ -1,12 +1,17 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { firstReducer } from './reducers/firstReducer';
+import { filterTabsReducer } from './reducers/filterTabsReducer';
 
 const rootReducer = combineReducers({
-  first: firstReducer,
+  tabsReducer: filterTabsReducer,
 });
 
 export const store = configureStore({
   reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      immutableCheck: false,
+      serializableCheck: false,
+    }),
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
