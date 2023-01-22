@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { filterTabsReducer } from './reducers/filterTabsReducer';
+import { tabsReducer } from './reducers/tabsReducer';
+import { filterReducer } from './reducers/filterReducer';
 
 const rootReducer = combineReducers({
-  tabsReducer: filterTabsReducer,
+  tabs: tabsReducer,
+  filters: filterReducer,
 });
 
 export const store = configureStore({

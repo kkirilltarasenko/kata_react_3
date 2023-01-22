@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
-import './FilterTabs.scss';
+import './Tabs.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux-config/store';
-import { setActiveAction, TabState } from '../redux-config/reducers/filterTabsReducer';
+import { setActiveTab, TabState } from '../redux-config/reducers/tabsReducer';
 
-const FilterTabs: FC = (): JSX.Element => {
+const Tabs: FC = (): JSX.Element => {
   const dispatch = useDispatch();
-  const tabs = useSelector((state: RootState) => state.tabsReducer.tabs);
+  const tabs = useSelector((state: RootState) => state.tabs.tabs);
 
-  const setActiveTab = (tab: TabState): void => {
-    dispatch(setActiveAction(tab));
+  const setTab = (tab: TabState): void => {
+    dispatch(setActiveTab(tab));
   };
 
   return (
@@ -19,7 +19,7 @@ const FilterTabs: FC = (): JSX.Element => {
           key={tab.id}
           className={tab.active ? 'tabs__element tabs__element--active' : 'tabs__element'}
           onClick={() => {
-            setActiveTab(tab);
+            setTab(tab);
           }}
         >
           <h1 className="tabs__element__title">{tab.body}</h1>
@@ -29,4 +29,4 @@ const FilterTabs: FC = (): JSX.Element => {
   );
 };
 
-export default FilterTabs;
+export default Tabs;

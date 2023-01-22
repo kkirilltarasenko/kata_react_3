@@ -12,6 +12,10 @@ $textColor: #4A4A4A;
 
   text-transform: uppercase;
   cursor: pointer;
+
+  -webkit-box-shadow: 0 0 8px 0 rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0 0 8px 0 rgba(34, 60, 80, 0.2);
+  box-shadow: 0 0 8px 0 rgba(34, 60, 80, 0.2);
   .tabs__element {
     width: 33.3333333333333%;
     height: 100%;
@@ -24,6 +28,14 @@ $textColor: #4A4A4A;
     border: 1px solid $borderTabColor;
 
     transition: all .3s ease;
+
+    &:nth-child(1) {
+      border-radius: 5px 0 0 5px;
+    }
+
+    &:nth-child(3) {
+      border-radius: 0 5px 5px 0;
+    }
     .tabs__element__title {
       font-size: 12px;
       font-weight: 600;

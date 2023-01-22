@@ -1,3 +1,5 @@
+import { SET_ACTIVE_TAB } from '../actions';
+
 export interface TabsState {
   tabs: TabState[];
 }
@@ -28,14 +30,12 @@ const defaultState: TabsState = {
   ],
 };
 
-const SET_ACTIVE = 'SET_ACTIVE';
-
-export const filterTabsReducer = (
+export const tabsReducer = (
   state = defaultState,
   action: { type: string; payload: TabState }
 ): TabsState => {
   switch (action.type) {
-    case SET_ACTIVE:
+    case SET_ACTIVE_TAB:
       return {
         ...state,
         tabs: state.tabs.map((tab) => {
@@ -52,7 +52,7 @@ export const filterTabsReducer = (
   }
 };
 
-export const setActiveAction = (payload: TabState): { type: string; payload: TabState } => ({
-  type: SET_ACTIVE,
+export const setActiveTab = (payload: TabState): { type: string; payload: TabState } => ({
+  type: SET_ACTIVE_TAB,
   payload,
 });
