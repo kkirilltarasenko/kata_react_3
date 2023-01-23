@@ -1,4 +1,10 @@
-import { SET_ACTIVE_FILTER, SET_ALL_FILTERS_ACTIVE, REMOVE_ALL_ACTIVE_FILTERS } from '../actions';
+import {
+  SET_ACTIVE_FILTER,
+  SET_ALL_FILTER_ACTIVE,
+  SET_ALL_FILTERS_ACTIVE,
+  REMOVE_ALL_FILTER_ACTIVE,
+  REMOVE_ALL_ACTIVE_FILTERS,
+} from '../actions';
 
 export interface FiltersState {
   filters: FilterState[];
@@ -51,7 +57,25 @@ export const filterReducer = (
         filters: state.filters.map((filter: FilterState) => {
           if (filter.id === action.payload.id) {
             filter.checked = !filter.checked;
-          } else {
+          }
+          return filter;
+        }),
+      };
+    case SET_ALL_FILTER_ACTIVE:
+      return {
+        ...state,
+        filters: state.filters.map((filter: FilterState) => {
+          if (filter.body === 'Все') {
+            filter.checked = true;
+          }
+          return filter;
+        }),
+      };
+    case REMOVE_ALL_FILTER_ACTIVE:
+      return {
+        ...state,
+        filters: state.filters.map((filter: FilterState) => {
+          if (filter.body === 'Все') {
             filter.checked = false;
           }
           return filter;
@@ -80,6 +104,20 @@ export const filterReducer = (
 
 export const setActiveFilter = (payload: FilterState): { type: string; payload: FilterState } => ({
   type: SET_ACTIVE_FILTER,
+  payload,
+});
+
+export const setAllFilterActive = (
+  payload: FilterState
+): { type: string; payload: FilterState } => ({
+  type: SET_ALL_FILTER_ACTIVE,
+  payload,
+});
+
+export const removeAllFilterActive = (
+  payload: FilterState
+): { type: string; payload: FilterState } => ({
+  type: REMOVE_ALL_FILTER_ACTIVE,
   payload,
 });
 

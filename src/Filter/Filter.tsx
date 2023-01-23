@@ -1,10 +1,12 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import './Filter.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux-config/store';
 import {
   FilterState,
   setActiveFilter,
+  setAllFilterActive,
+  removeAllFilterActive,
   setAllFiltersActive,
   removeAllActiveFilters,
 } from '../redux-config/reducers/filterReducer';
@@ -25,6 +27,26 @@ const Filter: FC = (): JSX.Element => {
       dispatch(setActiveFilter(filter));
     }
   };
+
+  const activeCheckboxes: Array<FilterState | null> = filters
+    .map((el: FilterState) => {
+      if (el.checked) {
+        return el;
+      }
+      return null;
+    })
+    .filter((el: FilterState | null) => el !== null);
+
+  const allFilter = filters[0];
+
+  useEffect(() => {
+    if (activeCheckboxes.length <= 4) {
+      dispatch(setAllFilterActive(allFilter));
+    }
+    if (activeCheckboxes.length < 5) {
+      dispatch(removeAllFilterActive(allFilter));
+    }
+  }, [allFilter, activeCheckboxes.length, dispatch]);
 
   return (
     <div className="filters">
