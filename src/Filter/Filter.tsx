@@ -3,13 +3,13 @@ import './Filter.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux-config/store';
 import {
-  FilterState,
   setActiveFilter,
   setAllFilterActive,
   removeAllFilterActive,
   setAllFiltersActive,
   removeAllActiveFilters,
-} from '../redux-config/reducers/filterReducer';
+} from '../redux-config/reducers/filterReducer/filterActions';
+import { FilterState } from '../redux-config/reducers/filterReducer/filterTypes';
 import { Checkbox } from 'antd';
 
 const Filter: FC = (): JSX.Element => {

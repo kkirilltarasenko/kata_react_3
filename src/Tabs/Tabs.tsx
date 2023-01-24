@@ -2,7 +2,8 @@ import React, { FC } from 'react';
 import './Tabs.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../redux-config/store';
-import { setActiveTab, TabState } from '../redux-config/reducers/tabsReducer';
+import { setActiveTab } from '../redux-config/reducers/tabsReducer/tabsActions';
+import { TabState } from '../redux-config/reducers/tabsReducer/tabsTypes';
 
 const Tabs: FC = (): JSX.Element => {
   const dispatch = useDispatch();

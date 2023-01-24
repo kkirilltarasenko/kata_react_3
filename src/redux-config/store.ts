@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { tabsReducer } from './reducers/tabsReducer';
-import { filterReducer } from './reducers/filterReducer';
+import { tabsReducer } from './reducers/tabsReducer/tabsReducer';
+import { filterReducer } from './reducers/filterReducer/filterReducer';
 
 const rootReducer = combineReducers({
   tabs: tabsReducer,
