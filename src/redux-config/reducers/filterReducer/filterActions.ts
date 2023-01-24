@@ -1,10 +1,10 @@
 import { FilterState } from './filterTypes';
 import {
-  REMOVE_ALL_ACTIVE_FILTERS,
-  REMOVE_ALL_FILTER_ACTIVE,
   SET_ACTIVE_FILTER,
   SET_ALL_FILTER_ACTIVE,
+  REMOVE_ALL_FILTER_ACTIVE,
   SET_ALL_FILTERS_ACTIVE,
+  REMOVE_ALL_ACTIVE_FILTERS,
 } from '../../actionTypes';
 
 export const setActiveFilter = (payload: FilterState): { type: string; payload: FilterState } => ({

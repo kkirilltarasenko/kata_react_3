@@ -1,8 +1,8 @@
 import {
   SET_ACTIVE_FILTER,
   SET_ALL_FILTER_ACTIVE,
-  SET_ALL_FILTERS_ACTIVE,
   REMOVE_ALL_FILTER_ACTIVE,
+  SET_ALL_FILTERS_ACTIVE,
   REMOVE_ALL_ACTIVE_FILTERS,
 } from '../../actionTypes';
 import { FiltersState, FilterState } from './filterTypes';
@@ -27,7 +27,7 @@ export const filterReducer = (
       return {
         ...state,
         filters: state.filters.map((filter: FilterState) => {
-          if (filter.body === 'Все') {
+          if (filter.id === action.payload.id) {
             filter.checked = true;
           }
           return filter;
@@ -37,7 +37,7 @@ export const filterReducer = (
       return {
         ...state,
         filters: state.filters.map((filter: FilterState) => {
-          if (filter.body === 'Все') {
+          if (filter.id === action.payload.id) {
             filter.checked = false;
           }
           return filter;

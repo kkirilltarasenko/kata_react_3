@@ -30,8 +30,10 @@ const Filter: FC = (): JSX.Element => {
 
   const activeCheckboxes: Array<FilterState | null> = filters
     .map((el: FilterState) => {
-      if (el.checked) {
-        return el;
+      if (el.body !== 'Все') {
+        if (el.checked) {
+          return el;
+        }
       }
       return null;
     })
@@ -42,11 +44,10 @@ const Filter: FC = (): JSX.Element => {
   useEffect(() => {
     if (activeCheckboxes.length === 4) {
       dispatch(setAllFilterActive(allFilter));
-    }
-    if (activeCheckboxes.length < 5) {
+    } else {
       dispatch(removeAllFilterActive(allFilter));
     }
-  }, [allFilter, activeCheckboxes.length, dispatch]);
+  }, [dispatch, allFilter, activeCheckboxes.length]);
 
   return (
     <div className="filters">
