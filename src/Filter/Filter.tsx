@@ -40,7 +40,7 @@ const Filter: FC = (): JSX.Element => {
   const allFilter = filters[0];
 
   useEffect(() => {
-    if (activeCheckboxes.length <= 4) {
+    if (activeCheckboxes.length === 4) {
       dispatch(setAllFilterActive(allFilter));
     }
     if (activeCheckboxes.length < 5) {
