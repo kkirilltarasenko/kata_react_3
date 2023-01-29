@@ -1,25 +1,33 @@
 import React, { useEffect } from 'react';
+/* Redux */
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../redux-config/store';
+/* Async Actions */
+import { fetchSearchId } from '../redux-config/reducers/searchIdReducer/searchIdReducer';
+import { fetchTickets } from '../redux-config/reducers/ticketsReducer/ticketsReducer';
 import './App.scss';
 /* Components */
 import Logo from '../Logo/Logo';
 import Tabs from '../Tabs/Tabs';
 import Filter from '../Filter/Filter';
 
-import { Ticket } from '../test';
-
 function App(): JSX.Element {
+  const dispatch = useDispatch<AppDispatch>();
+
   useEffect(() => {
-    async function fetchTickets(): Promise<{ tickets: Ticket[]; stop: boolean }> {
-      const searchID: { searchId: string } = await fetch(
-        'https://aviasales-test-api.kata.academy/search'
-      ).then(async (res) => await res.json());
-      return await fetch(
-        `https://aviasales-test-api.kata.academy/tickets?searchId=${searchID.searchId}`
-      ).then(async (res) => await res.json());
+    async function fetchAPI(): Promise<void> {
+      const searchId = await dispatch(fetchSearchId());
+      let tickets;
+      while (tickets === undefined) {
+        tickets = await dispatch(fetchTickets({ searchId: searchId.payload.searchId }));
+      }
+      while (tickets.payload.stop === false) {
+        tickets = await dispatch(fetchTickets({ searchId: searchId.payload.searchId }));
+      }
     }
 
-    console.log(fetchTickets());
-  });
+    void fetchAPI();
+  }, [dispatch]);
 
   return (
     <div className="App">

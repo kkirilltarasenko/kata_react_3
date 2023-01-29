@@ -1,10 +1,14 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { tabsReducer } from './reducers/tabsReducer/tabsReducer';
 import { filterReducer } from './reducers/filterReducer/filterReducer';
+import { searchIdSlice } from './reducers/searchIdReducer/searchIdReducer';
+import { ticketsSlice } from './reducers/ticketsReducer/ticketsReducer';
 
 const rootReducer = combineReducers({
   tabs: tabsReducer,
   filters: filterReducer,
+  searchId: searchIdSlice.reducer,
+  tickets: ticketsSlice.reducer,
 });
 
 export const store = configureStore({
@@ -17,3 +21,4 @@ export const store = configureStore({
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = typeof store.dispatch;
