@@ -3,9 +3,13 @@
   max-width: 754px;
   margin: 0 auto;
 
-  .App__container {
-    width: 100%;
+  .App__page {
     display: flex;
     justify-content: space-between;
+    width: 100%;
+
+    .App__container {
+      width: 66%;
+    }
   }
 }

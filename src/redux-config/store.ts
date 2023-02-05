@@ -3,12 +3,20 @@ import { tabsReducer } from './reducers/tabsReducer/tabsReducer';
 import { filterReducer } from './reducers/filterReducer/filterReducer';
 import { searchIdSlice } from './reducers/searchIdReducer/searchIdReducer';
 import { ticketsSlice } from './reducers/ticketsReducer/ticketsReducer';
+import { ticketsToShowReducer } from './reducers/ticketsToShowReducer/ticketsToShowReducer';
+import { fullFilledTicketsReducer } from './reducers/fullFilledTicketsReducer/fullFilledTicketsReducer';
+import { prevIndexReducer } from './reducers/prevIndexReducer/prevIndexReducer';
+import { currentIndexReducer } from './reducers/currentIndexReducer/currentIndexReducer';
 
 const rootReducer = combineReducers({
   tabs: tabsReducer,
   filters: filterReducer,
   searchId: searchIdSlice.reducer,
   tickets: ticketsSlice.reducer,
+  ticketsToShow: ticketsToShowReducer,
+  fullFilledTickets: fullFilledTicketsReducer,
+  prevIndex: prevIndexReducer,
+  currentIndex: currentIndexReducer,
 });
 
 export const store = configureStore({

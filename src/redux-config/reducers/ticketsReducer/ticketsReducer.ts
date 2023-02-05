@@ -32,7 +32,7 @@ export const ticketsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchTickets.fulfilled, (state: TicketsState, action) => {
-      state.tickets.push(action.payload);
+      state.tickets.push(...action.payload.tickets);
     });
     builder.addCase(fetchTickets.rejected, (state: TicketsState, action) => {
       state.error.push(action.payload as Error);

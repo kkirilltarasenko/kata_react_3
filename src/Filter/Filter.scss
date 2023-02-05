@@ -1,3 +1,4 @@
+$background: #ffffff;
 $textColor: #4A4A4A;
 $hoverColor: #F1FCFF;
 $filterColor: #FFFFFF;
@@ -11,6 +12,8 @@ $filterColor: #FFFFFF;
   box-shadow: 0 0 8px 0 rgba(34, 60, 80, 0.2);
 
   border-radius: 5px;
+
+  background-color: $background;
 
   color: $textColor;
   .filters__title {

@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import logo from '../images/Logo.png';
 import './Logo.scss';
+
 interface LogoProps {
   marginTop: number;
   marginBottom: number;
