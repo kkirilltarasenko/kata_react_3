@@ -5,7 +5,7 @@ export const defaultState: TabsState = {
     {
       id: 1,
       body: 'Самый дешевый',
-      active: false,
+      active: true,
     },
     {
       id: 2,

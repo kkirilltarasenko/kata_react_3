@@ -20,7 +20,6 @@ import './Tickets.scss';
 const Tickets: FC = (): JSX.Element => {
   const dispatch = useDispatch();
   const tickets: Ticket[] = useSelector((state: RootState) => state.fullFilledTickets.tickets);
-  // const TICKETS: Ticket[] = useSelector((state: RootState) => state.fullFilledTickets.tickets);
   const ticketsToShow: Ticket[] = useSelector(
     (state: RootState) => state.ticketsToShow.ticketsToShow
   );
@@ -32,6 +31,22 @@ const Tickets: FC = (): JSX.Element => {
     if (tabs[0].active) {
       tickets.sort((a, b) => {
         return a.price - b.price;
+      });
+    }
+
+    if (tabs[1].active) {
+      tickets.sort((a, b) => {
+        const ticket = a.segments[0].duration + a.segments[1].duration;
+        const _ticket = b.segments[0].duration + b.segments[1].duration;
+        return ticket - _ticket;
+      });
+    }
+
+    if (tabs[2].active) {
+      tickets.sort((a, b) => {
+        const ticket = a.price + a.segments[0].duration + a.segments[1].duration;
+        const _ticket = b.price + b.segments[0].duration + b.segments[1].duration;
+        return ticket - _ticket;
       });
     }
 
