@@ -1,4 +1,4 @@
-import { INCREMENT } from '../../actionTypes';
+import { INCREMENT, RELOAD } from '../../actionTypes';
 
 interface PrevIndexType {
   value: number;
@@ -15,6 +15,8 @@ export const prevIndexReducer = (
   switch (action.type) {
     case INCREMENT:
       return { ...state, value: state.value + action.payload };
+    case RELOAD:
+      return { ...state, value: 0 };
     default:
       return state;
   }
