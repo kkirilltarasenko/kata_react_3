@@ -11,7 +11,7 @@ export const ticketsToShowReducer = (
     case ADD_FIVE_TICKETS:
       return { ...state, ticketsToShow: [...state.ticketsToShow, ...action.payload] };
     case CLEAR_TICKETS_TO_SHOW:
-      return { ...state, ticketsToShow: [...action.payload] };
+      return { ...state, ticketsToShow: action.payload };
     default:
       return state;
   }

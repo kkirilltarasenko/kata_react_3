@@ -4,7 +4,7 @@ import {
   SET_ALL_FILTER_ACTIVE,
   REMOVE_ALL_FILTER_ACTIVE,
   SET_ALL_FILTERS_ACTIVE,
-  REMOVE_ALL_ACTIVE_FILTERS,
+  DEACTIVATE_ALL_FILTERS,
 } from '../../actionTypes';
 
 export const setActiveFilter = (payload: FilterState): { type: string; payload: FilterState } => ({
@@ -33,9 +33,6 @@ export const setAllFiltersActive = (
   payload,
 });
 
-export const removeAllActiveFilters = (
-  payload: FilterState
-): { type: string; payload: FilterState } => ({
-  type: REMOVE_ALL_ACTIVE_FILTERS,
-  payload,
+export const deactivateAllFilters = (): { type: string } => ({
+  type: DEACTIVATE_ALL_FILTERS,
 });

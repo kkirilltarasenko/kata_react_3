@@ -19,46 +19,33 @@ import './Tickets.scss';
 
 const Tickets: FC = (): JSX.Element => {
   const dispatch = useDispatch();
+
+  const source: Ticket[] = useSelector((state: RootState) => state.fullFilledTickets.source);
   const tickets: Ticket[] = useSelector((state: RootState) => state.fullFilledTickets.tickets);
   const ticketsToShow: Ticket[] = useSelector(
     (state: RootState) => state.ticketsToShow.ticketsToShow
   );
+
   const prevIndex = useSelector((state: RootState) => state.prevIndex.value);
   const currentIndex = useSelector((state: RootState) => state.currentIndex.value);
+
   const tabs = useSelector((state: RootState) => state.tabs.tabs);
+  const filters = useSelector((state: RootState) => state.filters.filters);
 
   useEffect(() => {
-    if (tabs[0].active) {
-      tickets.sort((a, b) => {
-        return a.price - b.price;
-      });
+    if (tickets.length === 0) {
+      dispatch(clearTicketsToShow([source[0]]));
+    } else {
+      dispatch(clearTicketsToShow([tickets[0]]));
     }
-
-    if (tabs[1].active) {
-      tickets.sort((a, b) => {
-        const ticket = a.segments[0].duration + a.segments[1].duration;
-        const _ticket = b.segments[0].duration + b.segments[1].duration;
-        return ticket - _ticket;
-      });
-    }
-
-    if (tabs[2].active) {
-      tickets.sort((a, b) => {
-        const ticket = a.price + a.segments[0].duration + a.segments[1].duration;
-        const _ticket = b.price + b.segments[0].duration + b.segments[1].duration;
-        return ticket - _ticket;
-      });
-    }
-
-    dispatch(clearTicketsToShow([tickets[0]]));
     dispatch(incrementPrevIndex(1));
     dispatch(incrementCurrentIndex(1));
-  }, [dispatch, tickets, tabs]);
+  }, [dispatch, tickets, tickets.length, source, tabs, filters]);
 
   const addFiveMoreTickets = (): void => {
     const _tickets: Ticket[] = [];
     for (let i: number = prevIndex; i < currentIndex; i++) {
-      _tickets.push(tickets[i]);
+      _tickets.push(tickets.length === 0 ? source[i] : tickets[i]);
     }
 
     dispatch(addTicketsToShow(_tickets));
@@ -66,12 +53,12 @@ const Tickets: FC = (): JSX.Element => {
     dispatch(incrementCurrentIndex(5));
   };
 
-  return tickets.length !== 0 ? (
+  return source.length !== 0 ? (
     <div>
       {ticketsToShow.map((el: Ticket) => (
         <TicketComponent key={Math.random()} ticket={el} />
       ))}
-      <ShowMoreButton onClick={addFiveMoreTickets} body={'Показать еще 5 билетов !'} />
+      <ShowMoreButton body={'Показать еще 5 билетов !'} onClick={addFiveMoreTickets} />
     </div>
   ) : (
     <div className="tickets__loading">

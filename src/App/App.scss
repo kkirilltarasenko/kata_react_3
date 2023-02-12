@@ -8,6 +8,11 @@
     justify-content: space-between;
     width: 100%;
 
+    .App__sidebar {
+      display: flex;
+      flex-direction: column;
+    }
+
     .App__container {
       width: 66%;
     }

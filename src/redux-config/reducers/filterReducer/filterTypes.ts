@@ -6,4 +6,5 @@ export interface FilterState {
   id: number;
   body: string;
   checked: boolean;
+  value?: number;
 }

@@ -3,7 +3,7 @@ import {
   SET_ALL_FILTER_ACTIVE,
   REMOVE_ALL_FILTER_ACTIVE,
   SET_ALL_FILTERS_ACTIVE,
-  REMOVE_ALL_ACTIVE_FILTERS,
+  DEACTIVATE_ALL_FILTERS,
 } from '../../actionTypes';
 import { FiltersState, FilterState } from './filterTypes';
 import { defaultState } from './filterState';
@@ -51,7 +51,7 @@ export const filterReducer = (
           return filter;
         }),
       };
-    case REMOVE_ALL_ACTIVE_FILTERS:
+    case DEACTIVATE_ALL_FILTERS:
       return {
         ...state,
         filters: state.filters.map((filter: FilterState) => {
