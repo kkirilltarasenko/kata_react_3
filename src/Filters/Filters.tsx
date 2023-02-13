@@ -16,6 +16,8 @@ import Filter from './Filter/Filter';
 import {
   setTicketsByFilter,
   clearTicketsByFilter,
+  setTicketsByTab,
+  clearTickets,
 } from '../redux-config/reducers/fullFilledTicketsReducer/fullFilledTicketsAction';
 import { deactivateAllTabs } from '../redux-config/reducers/tabsReducer/tabsActions';
 
@@ -49,11 +51,12 @@ const Filters: FC = (): JSX.Element => {
   }, [dispatch, allFilterElem, activeCheckboxes.length]);
 
   const allFilter = (): void => {
-    dispatch(setTicketsByFilter(source));
+    dispatch(setTicketsByTab(source));
     if (!allFilterElem.checked) {
       dispatch(setAllFiltersActive(allFilterElem));
     } else {
       dispatch(deactivateAllFilters());
+      dispatch(clearTickets());
     }
     dispatch(deactivateAllTabs());
   };

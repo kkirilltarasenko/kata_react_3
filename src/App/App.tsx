@@ -5,10 +5,13 @@ import { AppDispatch } from '../redux-config/store';
 /* Synchronize Actions  */
 import { deactivateAllFilters } from '../redux-config/reducers/filterReducer/filterActions';
 import { deactivateAllTabs } from '../redux-config/reducers/tabsReducer/tabsActions';
+import {
+  clearTickets,
+  filledTickets,
+} from '../redux-config/reducers/fullFilledTicketsReducer/fullFilledTicketsAction';
 /* Async Actions */
 import { fetchSearchId } from '../redux-config/reducers/searchIdReducer/searchIdReducer';
 import { fetchTickets } from '../redux-config/reducers/ticketsReducer/ticketsReducer';
-import { filledTickets } from '../redux-config/reducers/fullFilledTicketsReducer/fullFilledTicketsAction';
 /* Styles */
 import './App.scss';
 /* Components */
@@ -49,6 +52,7 @@ function App(): JSX.Element {
   const removeAll = (): void => {
     dispatch(deactivateAllFilters());
     dispatch(deactivateAllTabs());
+    dispatch(clearTickets());
   };
 
   return (

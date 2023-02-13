@@ -18,3 +18,5 @@ export const FILL = 'FILL';
 export const SET_BY_FILTER = 'SET_BY_FILTER';
 export const SET_BY_TAB = 'SET_BY_TAB';
 export const CLEAR_TICKETS_BY_FILTER = 'CLEAR_TICKETS_BY_FILTER';
+export const CLEAR_TICKETS = 'CLEAR_TICKETS';
+export const SAVE_SOURCE = 'SAVE_SOURCE';

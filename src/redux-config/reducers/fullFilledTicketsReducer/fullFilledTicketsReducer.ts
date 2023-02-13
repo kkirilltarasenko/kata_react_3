@@ -1,5 +1,12 @@
 import { Ticket } from '../ticketsReducer/ticketsTypes';
-import { CLEAR_TICKETS_BY_FILTER, FILL, SET_BY_FILTER, SET_BY_TAB } from '../../actionTypes';
+import {
+  CLEAR_TICKETS_BY_FILTER,
+  CLEAR_TICKETS,
+  FILL,
+  SET_BY_FILTER,
+  SET_BY_TAB,
+  SAVE_SOURCE,
+} from '../../actionTypes';
 
 interface FullFilledTicketsType {
   tickets: Ticket[];
@@ -32,6 +39,16 @@ export const fullFilledTicketsReducer = (
       return {
         ...state,
         tickets: action.payload,
+      };
+    case CLEAR_TICKETS:
+      return {
+        ...state,
+        tickets: [],
+      };
+    case SAVE_SOURCE:
+      return {
+        ...state,
+        source: action.payload,
       };
     default:
       return state;
