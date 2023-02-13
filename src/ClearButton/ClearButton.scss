@@ -21,4 +21,10 @@ $text: #FFFFFF;
   &:hover {
     background-color: $hoverBackground;
   }
+
+  @media screen and (max-width: 700px) {
+    width: 100%;
+    max-width: 502px;
+    margin-bottom: 20px;
+  }
 }

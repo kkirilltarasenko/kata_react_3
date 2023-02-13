@@ -41,6 +41,10 @@ $textColor: #4A4A4A;
       font-weight: 600;
       color: $textColor;
       letter-spacing: 0.5px;
+
+      @media screen and (max-width: 500px) {
+        font-size: 10px;
+      }
     }
 
     &:hover {
@@ -58,5 +62,9 @@ $textColor: #4A4A4A;
     .tabs__element__title {
       color: $nonActiveTabBackground;
     }
+  }
+
+  @media screen and (max-width: 500px) {
+    width: 352px;
   }
 }

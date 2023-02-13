@@ -83,23 +83,25 @@ const Filters: FC = (): JSX.Element => {
   return (
     <div className="filters">
       <h1 className="filters__title">Количество пересадок</h1>
-      <div className="filters__element">
-        <li
-          className="filters__element__box"
-          onChange={() => {
-            allFilter();
-          }}
-        >
-          <Checkbox checked={allFilterElem.checked}>
-            <h2 className="filters__element__title">{allFilterElem.body}</h2>
-          </Checkbox>
-        </li>
+      <div className="filters__elements">
+        <div className="filters__element">
+          <li
+            className="filters__element__box"
+            onChange={() => {
+              allFilter();
+            }}
+          >
+            <Checkbox checked={allFilterElem.checked}>
+              <h2 className="filters__element__title">{allFilterElem.body}</h2>
+            </Checkbox>
+          </li>
+        </div>
+        <>
+          {filtersWithoutAll.map((filter: FilterState) => {
+            return <Filter key={Math.random()} filter={filter} filterFunction={filterFunction} />;
+          })}
+        </>
       </div>
-      <>
-        {filtersWithoutAll.map((filter: FilterState) => {
-          return <Filter key={Math.random()} filter={filter} filterFunction={filterFunction} />;
-        })}
-      </>
     </div>
   );
 };

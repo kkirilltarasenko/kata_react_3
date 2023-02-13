@@ -44,11 +44,17 @@ $colBodyColor: #4A4A4A;
         .ticket__col--header {
           color: $colHeaderColor;
           font-size: 12px;
+          @media screen and (max-width: 500px) {
+            font-size: 8px;
+          }
         }
 
         .ticket__col--body {
           color: $colBodyColor;
           font-size: 14px;
+          @media screen and (max-width: 500px) {
+            font-size: 10px;
+          }
         }
 
         &:nth-child(2) {
@@ -56,5 +62,9 @@ $colBodyColor: #4A4A4A;
         }
       }
     }
+  }
+
+  @media screen and (max-width: 500px) {
+    width: 352px;
   }
 }
