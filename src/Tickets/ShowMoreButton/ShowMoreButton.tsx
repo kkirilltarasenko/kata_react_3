@@ -4,18 +4,15 @@ import './ShowMoreButton.scss';
 interface ShowMoreButtonProps {
   body: string;
   onClick: () => void;
-  vision: boolean;
 }
 
-const ShowMoreButton: FC<ShowMoreButtonProps> = ({ body, onClick, vision }): JSX.Element => {
-  const classNames = vision ? 'show__button' : 'none';
-
+const ShowMoreButton: FC<ShowMoreButtonProps> = ({ body, onClick }): JSX.Element => {
   return (
     <button
       onClick={() => {
         onClick();
       }}
-      className={classNames}
+      className="show__button"
     >
       {body}
     </button>

@@ -5,7 +5,6 @@ import { searchIdSlice } from './reducers/searchIdReducer/searchIdReducer';
 import { ticketsSlice } from './reducers/ticketsReducer/ticketsReducer';
 import { ticketsToShowReducer } from './reducers/ticketsToShowReducer/ticketsToShowReducer';
 import { fullFilledTicketsReducer } from './reducers/fullFilledTicketsReducer/fullFilledTicketsReducer';
-import { buttonReducer } from './reducers/showButtonReducer/showButtonReducer';
 import { indexReducer } from './reducers/indexReducer/indexReducer';
 
 const rootReducer = combineReducers({
@@ -15,7 +14,6 @@ const rootReducer = combineReducers({
   tickets: ticketsSlice.reducer,
   ticketsToShow: ticketsToShowReducer,
   fullFilledTickets: fullFilledTicketsReducer,
-  button: buttonReducer,
   index: indexReducer,
 });
 

@@ -1,7 +1,6 @@
 import { Ticket } from '../ticketsReducer/ticketsTypes';
 import {
   CLEAR_TICKETS_BY_FILTER,
-  CLEAR_TICKETS,
   FILL,
   SET_BY_FILTER,
   SET_BY_TAB,
@@ -26,10 +25,6 @@ export const setTicketsByTab = (payload: Ticket[]): { type: string; payload: Tic
 export const clearTicketsByFilter = (payload: Ticket[]): { type: string; payload: Ticket[] } => ({
   type: CLEAR_TICKETS_BY_FILTER,
   payload,
-});
-
-export const clearTickets = (): { type: string } => ({
-  type: CLEAR_TICKETS,
 });
 
 export const saveSource = (payload: Ticket[]): { type: string; payload: Ticket[] } => ({

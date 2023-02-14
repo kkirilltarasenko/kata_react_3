@@ -10,12 +10,13 @@ import {
 } from '../redux-config/reducers/fullFilledTicketsReducer/fullFilledTicketsAction';
 import { TabState } from '../redux-config/reducers/tabsReducer/tabsTypes';
 import Tab from './Tab/Tab';
-import { setButtonVision } from '../redux-config/reducers/showButtonReducer/showButtonAction';
 
 const Tabs: FC = (): JSX.Element => {
   const dispatch = useDispatch();
   const tabs = useSelector((state: RootState) => state.tabs.tabs);
-  const source: Ticket[] = useSelector((state: RootState) => state.fullFilledTickets.source);
+  const ticketsToShow: Ticket[] = useSelector(
+    (state: RootState) => state.ticketsToShow.ticketsToShow
+  );
   const tickets: Ticket[] = useSelector((state: RootState) => state.fullFilledTickets.tickets);
 
   const functionTab = (tab: TabState): void => {
@@ -48,19 +49,19 @@ const Tabs: FC = (): JSX.Element => {
     } else {
       switch (tab.body) {
         case 'Самый дешевый':
-          _tickets = source.sort((a, b) => {
+          _tickets = ticketsToShow.sort((a, b) => {
             return a.price - b.price;
           });
           break;
         case 'Самый быстрый':
-          _tickets = source.sort((a, b) => {
+          _tickets = ticketsToShow.sort((a, b) => {
             const ticket = a.segments[0].duration + a.segments[1].duration;
             const _ticket = b.segments[0].duration + b.segments[1].duration;
             return ticket - _ticket;
           });
           break;
         case 'Оптимальный':
-          _tickets = source.sort((a, b) => {
+          _tickets = ticketsToShow.sort((a, b) => {
             const ticket = a.price + a.segments[0].duration + a.segments[1].duration;
             const _ticket = b.price + b.segments[0].duration + b.segments[1].duration;
             return ticket - _ticket;
@@ -72,7 +73,6 @@ const Tabs: FC = (): JSX.Element => {
       dispatch(saveSource(_tickets));
     }
     dispatch(setActiveTab(tab));
-    dispatch(setButtonVision(true));
   };
 
   return (

@@ -17,16 +17,15 @@ import {
   setTicketsByFilter,
   clearTicketsByFilter,
   setTicketsByTab,
-  clearTickets,
 } from '../redux-config/reducers/fullFilledTicketsReducer/fullFilledTicketsAction';
 import { deactivateAllTabs } from '../redux-config/reducers/tabsReducer/tabsActions';
-import { setButtonVision } from '../redux-config/reducers/showButtonReducer/showButtonAction';
 
 const Filters: FC = (): JSX.Element => {
   const dispatch = useDispatch();
   const filters = useSelector((state: RootState) => state.filters.filters);
-  const source: Ticket[] = useSelector((state: RootState) => state.fullFilledTickets.source);
-  const tickets: Ticket[] = useSelector((state: RootState) => state.fullFilledTickets.tickets);
+  const ticketsToShow: Ticket[] = useSelector(
+    (state: RootState) => state.ticketsToShow.ticketsToShow
+  );
 
   const allFilterElem = filters[0];
   const filtersWithoutAll = [filters[1], filters[2], filters[3], filters[4]];
@@ -52,12 +51,11 @@ const Filters: FC = (): JSX.Element => {
   }, [dispatch, allFilterElem, activeCheckboxes.length]);
 
   const allFilter = (): void => {
-    dispatch(setTicketsByTab(source));
+    dispatch(setTicketsByTab(ticketsToShow));
     if (!allFilterElem.checked) {
       dispatch(setAllFiltersActive(allFilterElem));
     } else {
       dispatch(deactivateAllFilters());
-      dispatch(clearTickets());
     }
     dispatch(deactivateAllTabs());
   };
@@ -65,21 +63,20 @@ const Filters: FC = (): JSX.Element => {
   const filterFunction = (filter: FilterState): void => {
     dispatch(setActiveFilter(filter));
     let nonCheckedTickets: Ticket[] = [];
-    const _tickets = source.filter((el: Ticket) => {
+    const _tickets = ticketsToShow.filter((el: Ticket) => {
       return (
-        el.segments[0].stops.length === filter.value && el.segments[1].stops.length === filter.value
+        el.segments[0].stops.length === filter.value || el.segments[1].stops.length === filter.value
       );
     });
     if (!filter.checked) {
-      nonCheckedTickets = tickets.filter((el: Ticket) => {
-        return !_tickets.includes(el);
+      nonCheckedTickets = _tickets.filter((el: Ticket) => {
+        return !ticketsToShow.includes(el);
       });
       dispatch(clearTicketsByFilter(nonCheckedTickets));
     } else {
       dispatch(setTicketsByFilter(_tickets));
     }
     dispatch(deactivateAllTabs());
-    dispatch(setButtonVision(true));
   };
 
   return (

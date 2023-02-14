@@ -1,15 +1,14 @@
 import React, { useEffect } from 'react';
 /* Redux */
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../redux-config/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../redux-config/store';
 /* Synchronize Actions  */
 import { deactivateAllFilters } from '../redux-config/reducers/filterReducer/filterActions';
 import { deactivateAllTabs } from '../redux-config/reducers/tabsReducer/tabsActions';
 import {
-  clearTickets,
+  clearTicketsByFilter,
   filledTickets,
 } from '../redux-config/reducers/fullFilledTicketsReducer/fullFilledTicketsAction';
-import { setButtonVision } from '../redux-config/reducers/showButtonReducer/showButtonAction';
 /* Async Actions */
 import { fetchSearchId } from '../redux-config/reducers/searchIdReducer/searchIdReducer';
 import { fetchTickets } from '../redux-config/reducers/ticketsReducer/ticketsReducer';
@@ -25,6 +24,9 @@ import ClearButton from '../ClearButton/ClearButton';
 
 function App(): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
+  const ticketsToShow: Ticket[] = useSelector(
+    (state: RootState) => state.ticketsToShow.ticketsToShow
+  );
 
   useEffect(() => {
     const _tickets: Ticket[] = [];
@@ -53,8 +55,7 @@ function App(): JSX.Element {
   const removeAll = (): void => {
     dispatch(deactivateAllFilters());
     dispatch(deactivateAllTabs());
-    dispatch(clearTickets());
-    dispatch(setButtonVision(true));
+    dispatch(clearTicketsByFilter(ticketsToShow));
   };
 
   return (
