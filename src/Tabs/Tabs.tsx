@@ -10,6 +10,7 @@ import {
 } from '../redux-config/reducers/fullFilledTicketsReducer/fullFilledTicketsAction';
 import { TabState } from '../redux-config/reducers/tabsReducer/tabsTypes';
 import Tab from './Tab/Tab';
+import { setButtonVision } from '../redux-config/reducers/showButtonReducer/showButtonAction';
 
 const Tabs: FC = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -71,6 +72,7 @@ const Tabs: FC = (): JSX.Element => {
       dispatch(saveSource(_tickets));
     }
     dispatch(setActiveTab(tab));
+    dispatch(setButtonVision(true));
   };
 
   return (

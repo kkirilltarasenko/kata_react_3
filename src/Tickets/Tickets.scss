@@ -1,6 +1,10 @@
-.tickets__buttons {
-  display: flex;
-  justify-content: space-between;
+.tickets {
+  padding-bottom: 10px;
+
+  .tickets__buttons {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .tickets__loading {

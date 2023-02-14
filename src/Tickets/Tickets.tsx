@@ -7,8 +7,8 @@ import {
   addTicketsToShow,
   clearTicketsToShow,
 } from '../redux-config/reducers/ticketsToShowReducer/ticketsToShowActions';
-import { incrementPrevIndex } from '../redux-config/reducers/prevIndexReducer/prevIndexAction';
-import { incrementCurrentIndex } from '../redux-config/reducers/currentIndexReducer/currentIndexAction';
+import { setButtonVision } from '../redux-config/reducers/showButtonReducer/showButtonAction';
+import { setIndexValue } from '../redux-config/reducers/indexReducer/indexActions';
 /* Components */
 import ShowMoreButton from './ShowMoreButton/ShowMoreButton';
 import TicketComponent from './TicketComponent/TicketComponent';
@@ -26,39 +26,46 @@ const Tickets: FC = (): JSX.Element => {
     (state: RootState) => state.ticketsToShow.ticketsToShow
   );
 
-  const prevIndex = useSelector((state: RootState) => state.prevIndex.value);
-  const currentIndex = useSelector((state: RootState) => state.currentIndex.value);
+  const vision: boolean = useSelector((state: RootState) => state.button.vision);
 
   const tabs = useSelector((state: RootState) => state.tabs.tabs);
   const filters = useSelector((state: RootState) => state.filters.filters);
 
+  const index = useSelector((state: RootState) => state.index.value);
+
   useEffect(() => {
     if (tickets.length === 0) {
-      dispatch(clearTicketsToShow([source[0]]));
+      const ticketsPreview: Ticket[] = [source[0], source[1], source[2], source[3], source[4]];
+      dispatch(clearTicketsToShow(ticketsPreview));
     } else {
-      dispatch(clearTicketsToShow([tickets[0]]));
+      const ticketsPreview: Ticket[] = [tickets[0], tickets[1], tickets[2], tickets[3], tickets[4]];
+      dispatch(clearTicketsToShow(ticketsPreview));
     }
-    dispatch(incrementPrevIndex(1));
-    dispatch(incrementCurrentIndex(1));
   }, [dispatch, tickets, tickets.length, source, tabs, filters]);
 
   const addFiveMoreTickets = (): void => {
-    const _tickets: Ticket[] = [];
-    for (let i: number = prevIndex; i < currentIndex; i++) {
-      _tickets.push(tickets.length === 0 ? source[i] : tickets[i]);
+    if (tickets.length === 0) {
+      const _tickets: Ticket[] = [
+        source[index],
+        source[index + 1],
+        source[index + 2],
+        source[index + 3],
+        source[index + 4],
+      ];
+      dispatch(setIndexValue(5));
+      dispatch(addTicketsToShow(_tickets));
+    } else {
+      dispatch(addTicketsToShow(tickets));
+      dispatch(setButtonVision(false));
     }
-
-    dispatch(addTicketsToShow(_tickets));
-    dispatch(incrementPrevIndex(5));
-    dispatch(incrementCurrentIndex(5));
   };
 
   return source.length !== 0 ? (
-    <div>
+    <div className="tickets">
       {ticketsToShow.map((el: Ticket) => (
         <TicketComponent key={Math.random()} ticket={el} />
       ))}
-      <ShowMoreButton body={'Показать еще 5 билетов !'} onClick={addFiveMoreTickets} />
+      <ShowMoreButton body={'Показать еще'} onClick={addFiveMoreTickets} vision={vision} />
     </div>
   ) : (
     <div className="tickets__loading">

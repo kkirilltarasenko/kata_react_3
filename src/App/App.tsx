@@ -9,6 +9,7 @@ import {
   clearTickets,
   filledTickets,
 } from '../redux-config/reducers/fullFilledTicketsReducer/fullFilledTicketsAction';
+import { setButtonVision } from '../redux-config/reducers/showButtonReducer/showButtonAction';
 /* Async Actions */
 import { fetchSearchId } from '../redux-config/reducers/searchIdReducer/searchIdReducer';
 import { fetchTickets } from '../redux-config/reducers/ticketsReducer/ticketsReducer';
@@ -53,6 +54,7 @@ function App(): JSX.Element {
     dispatch(deactivateAllFilters());
     dispatch(deactivateAllTabs());
     dispatch(clearTickets());
+    dispatch(setButtonVision(true));
   };
 
   return (

@@ -2,6 +2,10 @@ $background: #2196F3;
 $hoverBackground: #007ed2;
 $text: #FFFFFF;
 
+.none {
+  display: none;
+}
+
 .show__button {
   width: 502px;
   height: 49px;
@@ -22,11 +26,7 @@ $text: #FFFFFF;
     background-color: $hoverBackground;
   }
 
-  @media screen and (max-width: 700px) {
-    margin-bottom: 10px;
-
-    @media screen and (max-width: 500px) {
-      width: 352px;
-    }
+  @media screen and (max-width: 500px) {
+    width: 352px;
   }
 }

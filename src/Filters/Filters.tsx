@@ -20,6 +20,7 @@ import {
   clearTickets,
 } from '../redux-config/reducers/fullFilledTicketsReducer/fullFilledTicketsAction';
 import { deactivateAllTabs } from '../redux-config/reducers/tabsReducer/tabsActions';
+import { setButtonVision } from '../redux-config/reducers/showButtonReducer/showButtonAction';
 
 const Filters: FC = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -78,6 +79,7 @@ const Filters: FC = (): JSX.Element => {
       dispatch(setTicketsByFilter(_tickets));
     }
     dispatch(deactivateAllTabs());
+    dispatch(setButtonVision(true));
   };
 
   return (
